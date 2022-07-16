@@ -1,6 +1,6 @@
 # satellite-building-counting
 
-Подсчет домов со спутников снимков через instance segmentation
+Подсчет домов со спутниковых снимков через instance segmentation
 
 ![](images/000000000014.jpg)
 ![](images/mask000000000014.jpg)
