@@ -1,0 +1,51 @@
+version: "3.5"
+
+services:
+
+  data_creation:
+    container_name: data_creation
+    build: ./src
+    image: building_detection
+    command: data_creation.py
+    volumes:
+      - $PWD/data:/data
+      - $PWD/model:/model
+    shm_size: '4gb'
+
+
+  train:
+    runtime: nvidia
+    container_name: train
+    build: ./src
+    image: building_detection
+    entrypoint: python
+    command: train.py
+    volumes:
+      - $PWD/data:/data
+      - $PWD/model:/model
+    shm_size: '4gb'
+
+
+  inference:
+    runtime: nvidia
+    container_name: inference
+    build: ./src
+    image: building_detection
+    entrypoint: python
+    command: inference.py 
+    volumes:
+      - $PWD/data:/data
+      - $PWD/model:/model
+    shm_size: '4gb'
+
+  draw_detections:
+    runtime: nvidia
+    container_name: draw_detections
+    build: ./src
+    image: building_detection
+    entrypoint: python
+    command: draw_detections.py 
+    volumes:
+      - $PWD/data:/data
+      - $PWD/model:/model
+    shm_size: '4gb'
